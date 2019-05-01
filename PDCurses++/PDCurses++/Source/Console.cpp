@@ -1,4 +1,3 @@
-//#include "pch.h"
 
 #include "Console.h"
 #include <curses.h>
@@ -31,17 +30,17 @@ void Console::SetEcho(bool value)
 
 void Console::SetHalfDelay(int ms)
 {
-	halfdelay(ms)
+	halfdelay(ms);
 }
 
 void Console::SetKeypad(bool value)
 {
-	keypad(this->window, value);
+	keypad((WINDOW*)this->window, value);
 }
 
 void Console::SetNoDelay(bool value)
 {
-	nodelay(this->window, value);
+	nodelay((WINDOW*)this->window, value);
 }
 
 void Console::SetNoLine(bool value)
@@ -56,19 +55,19 @@ void Console::SetRawMode(bool value)
 
 void Console::setTimeout(int miliseconds)
 {
-	wtimeout(this->window,miliseconds)
+	wtimeout((WINDOW*)this->window, miliseconds);
 }
 
 void Console::SetScroll(bool value)
 {
-	scrollok(this->window, value);
+	scrollok((WINDOW*)this->window, value);
 }
 
 std::string Console::ReadLine(int bufferSize)
 {
 	char* temp = new char[bufferSize];
 
-	wgetnstr(this->window, temp, bufferSize);
+	wgetnstr((WINDOW*)this->window, temp, bufferSize);
 
 	std::string retValue = std::string((const char*)temp);
 
@@ -78,14 +77,14 @@ std::string Console::ReadLine(int bufferSize)
 
 char Console::ReadChar()
 {
-	return (char)wgetch(this->window);
+	return (char)wgetch((WINDOW*)this->window);
 }
 
 std::string Console::ReadFromScreen(int bufferSize)
 {
 	
 	char* temp = new char[bufferSize];
-	winnstr(this->window, temp, bufferSize);
+	winnstr((WINDOW*)this->window, temp, bufferSize);
 
 	std::string retValue = std::string((const char*)temp);
 	delete[]temp;
@@ -99,7 +98,7 @@ std::string Console::ReadFromScreenAT(int y, int x, int bufferSize)
 	int prevX, prevY;
 
 	GetCursorPosition(prevX, prevY);
-	mvwinnstr(this->window, y,x,temp, bufferSize);
+	mvwinnstr((WINDOW*)this->window, y,x,temp, bufferSize);
 
 	std::string retValue = std::string((const char*)temp);
 	delete[]temp;
@@ -110,7 +109,7 @@ std::string Console::ReadFromScreenAT(int y, int x, int bufferSize)
 void Console::WriteLine(std::string str)
 {
 	printw(str.c_str());
-	wrefresh(this->window);
+	wrefresh((WINDOW*)this->window);
 }
 
 void Console::WriteLineAt(int y, int x, std::string str)
@@ -125,13 +124,13 @@ void Console::WriteLineAt(int y, int x, std::string str)
 
 void Console::WriteLineAndMoveCursor(int y, int x, std::string str)
 {
-	mvwprintw(this->window, y, x, str.c_str());
-	wrefresh(this->window);
+	mvwprintw((WINDOW*)this->window, y, x, str.c_str());
+	wrefresh((WINDOW*)this->window);
 }
 
 void Console::WriteChar(char c)
 {
-	wprintw(this->window, "%c", c);
+	wprintw((WINDOW*)this->window, "%c", c);
 }
 
 void Console::WriteCharAt(int y, int x, char c)
@@ -146,17 +145,17 @@ void Console::WriteCharAt(int y, int x, char c)
 
 void Console::WriteCharAndMoveCursor(int y, int x, char c)
 {
-	mvwprintw(this->window, x, y, "%c", c);
+	mvwprintw((WINDOW*)this->window, x, y, "%c", c);
 }
 
 void Console::DefineScrollableRegion(int top, int bottom)
 {
-	wsetscrreg(this->window, top, bottom);
+	wsetscrreg((WINDOW*)this->window, top, bottom);
 }
 
 void Console::Scroll(int n)
 {
-	wscrl(this->window, n);
+	wscrl((WINDOW*)this->window, n);
 }
 
 bool Console::HasKey(int key)
@@ -176,55 +175,65 @@ void Console::CreateStyle(Color Foreground, Color Background, std::string Name)
 
 void Console::SetStyle(std::string Name)
 {
-	THROWIF(wcolor_set(this->window, this->styles.at(Name).GetID(), nullptr) != OK)
+	THROWIF(wcolor_set((WINDOW*)this->window, this->styles.at(Name).GetID(), nullptr) != OK)
 }
 
 void Console::Clear()
 {
-	THROWIF(wclear(this->window) != OK)	
+	THROWIF(wclear((WINDOW*)this->window) != OK)	
 }
 
 void Console::ClearLine(int y)
 {
 	MoveCursor(0, y);
-	THROWIF(wclrtoeol(this->window) != OK)
+	THROWIF(wclrtoeol((WINDOW*)this->window) != OK)
 }
 
 void Console::ClearFrom(int y, int x)
 {
 	MoveCursor(x, y);
-	wclrtobot(this->window);
+	wclrtobot((WINDOW*)this->window);
 }
 
 void Console::DeleteLine(int y)
 {
 	int prevX, PrevY;
 	GetCursorPosition(prevX, PrevY);
-	mvwdeleteln(this->window, y, 0);
+	mvwdeleteln((WINDOW*)this->window, y, 0);
 	MoveCursor(prevX, PrevY);
 }
 
 void Console::DeleteCurrentLine()
 {
-	wdeleteln(this->window);
+	wdeleteln((WINDOW*)this->window);
 }
 
 void Console::InsertLine(int y)
 {
 	int prevX, prevY;
 	GetCursorPosition(prevX, prevY);
-	mvwinsertln(this->window, y, 0);
+	mvwinsertln((WINDOW*)this->window, y, 0);
 	MoveCursor(prevX, prevY);
 }
 
 void Console::MoveCursor(int x, int y)
 {
-	THROWIF(wmove(this->window, y, x) != OK)
+	THROWIF(wmove((WINDOW*)this->window, y, x) != OK)
 }
 
 void Console::GetCursorPosition(int& x, int& y)
 {
-	getyx(this->window, y, x);
+	getyx((WINDOW*)this->window, y, x);
+}
+
+void Console::Beep()
+{
+	beep();
+}
+
+void Console::Flash()
+{
+	flash();
 }
 
 

@@ -1,7 +1,5 @@
 #pragma once
-//#include <curses.h>
 #include "Colors.h"
-//C:\Dev\C++\PDCurses++\PDCurses++\Vendor\PDCurses\Headers
 #include <vector>
 #include <string>
 #include <map>

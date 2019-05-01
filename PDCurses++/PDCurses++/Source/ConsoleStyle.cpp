@@ -1,4 +1,5 @@
 #include "ConsoleStyle.h"
+#include <curses.h>
 
 
 

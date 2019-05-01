@@ -14,7 +14,7 @@
 /*
 	Cosas para implementar:
 
-		- Scroll
+DONE	- Scroll		
 		- Beep y flash
 		- Atributos en los stilos
 		- Mouse?
@@ -27,9 +27,6 @@
 		- Acomodar las carpetas
 */
 
-
-
-extern Color;
 
 class Console
 {
@@ -108,9 +105,11 @@ public:
 	// It scrolls N lines. If N > 0 it scrolls up. if N < 0 it scrolls down.
 	void Scroll(int n = 1);
 
-
+	// It returns true if your keyboard has taht key.
 	bool HasKey(int key);
+	// It returns the name of the key.
 	std::string KeyName(int key);
+
 
 	// It creates an style that can be applied to any text written on the console (fore/background only)
 	// Color Foreground: Color of the text
@@ -140,9 +139,14 @@ public:
 	// It retrieves the position of the cursor
 	void GetCursorPosition(int &x, int &y);
 
+	// The console makes a beeping sound (or it will flash if it can't beep)
+	void Beep();
+	// The lines written in the console will invert their foreground and background colors for an instant
+	void Flash();
+
 
 private:
-	WINDOW* window = nullptr;
+	void* window = nullptr;
 	std::map<std::string, ConsoleStyle> styles;
 	short StyleCount = 1;
 };
