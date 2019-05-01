@@ -17,9 +17,9 @@
 
 DONE	- Scroll		
 DONE	- Beep y flash
-		- Atributos en los stilos
-		- Mouse?
-		- Window (y ver como hacemos para arreglar lo de initscr() (supongo que con singleton))
+DONE	- Atributos en los stilos
+NOT		- Mouse?
+NOT		- Window (y ver como hacemos para arreglar lo de initscr() (supongo que con singleton))
 DONE	- clipboard
 
 	Arreglos:
@@ -86,8 +86,9 @@ public:
 	// It reads the characters from a given position without changing the cursor position.
 	std::string ReadFromScreenAT(int y, int x,int bufferSize = 500);
 
-
-	// Writes a string in the current position
+	// Writes a string in the current position of the cursor
+	void Write(std::string str);
+	// Writes a string in the current line and moves the cursor to the next
 	void WriteLine(std::string str);
 	// Writes a string in a given position without changing the position of the cursor
 	void WriteLineAt(int y, int x, std::string str);

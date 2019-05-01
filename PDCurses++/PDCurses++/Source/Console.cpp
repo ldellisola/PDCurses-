@@ -106,9 +106,15 @@ std::string Console::ReadFromScreenAT(int y, int x, int bufferSize)
 	return retValue;
 }
 
+void Console::Write(std::string)
+{
+	printw((str + "\n").c_str());
+	wrefresh((WINDOW*)this->window);
+}
+
 void Console::WriteLine(std::string str)
 {
-	printw(str.c_str());
+	printw((str+"\n").c_str());
 	wrefresh((WINDOW*)this->window);
 }
 
