@@ -11,7 +11,21 @@
 
 
 
+/*
+	Cosas para implementar:
 
+		- Scroll
+		- Beep y flash
+		- Atributos en los stilos
+		- Mouse?
+		- Window (y ver como hacemos para arreglar lo de initscr() (supongo que con singleton))
+		- clipboard
+
+	Arreglos:
+
+		- Modularizar todo.
+		- Acomodar las carpetas
+*/
 
 
 
@@ -61,6 +75,9 @@ public:
 	// the read blocks for the delay period; if the period expires, ERR is returned.
 	void setTimeout(int miliseconds);
 
+	// Enables scrolling in a region of the Console
+	void SetScroll(bool value);
+
 	// It reads the input from the console.
 	// intbufferSize: It is the maximum size of the string that the console will read
 	std::string ReadLine(int bufferSize = 500);
@@ -85,6 +102,12 @@ public:
 	void WriteCharAt(int y, int x, char c);
 	// Moves the cursor to a given position and writes a char
 	void WriteCharAndMoveCursor(int y, int x, char c); 
+
+	// It defines a region of the console as scrollable.
+	void DefineScrollableRegion(int top, int bottom);
+	// It scrolls N lines. If N > 0 it scrolls up. if N < 0 it scrolls down.
+	void Scroll(int n = 1);
+
 
 	bool HasKey(int key);
 	std::string KeyName(int key);

@@ -59,6 +59,11 @@ void Console::setTimeout(int miliseconds)
 	wtimeout(this->window,miliseconds)
 }
 
+void Console::SetScroll(bool value)
+{
+	scrollok(this->window, value);
+}
+
 std::string Console::ReadLine(int bufferSize)
 {
 	char* temp = new char[bufferSize];
@@ -142,6 +147,16 @@ void Console::WriteCharAt(int y, int x, char c)
 void Console::WriteCharAndMoveCursor(int y, int x, char c)
 {
 	mvwprintw(this->window, x, y, "%c", c);
+}
+
+void Console::DefineScrollableRegion(int top, int bottom)
+{
+	wsetscrreg(this->window, top, bottom);
+}
+
+void Console::Scroll(int n)
+{
+	wscrl(this->window, n);
 }
 
 bool Console::HasKey(int key)
