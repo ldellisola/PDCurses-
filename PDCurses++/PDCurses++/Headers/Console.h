@@ -8,6 +8,7 @@
 #include <string>
 #include <map>
 #include <exception>
+#include "Attributes.h"
 
 
 
@@ -15,11 +16,11 @@
 	Cosas para implementar:
 
 DONE	- Scroll		
-		- Beep y flash
+DONE	- Beep y flash
 		- Atributos en los stilos
 		- Mouse?
 		- Window (y ver como hacemos para arreglar lo de initscr() (supongo que con singleton))
-		- clipboard
+DONE	- clipboard
 
 	Arreglos:
 
@@ -115,7 +116,7 @@ public:
 	// Color Foreground: Color of the text
 	// Color Background: Color of the terminal in that place.
 	// std::string Name: Identifier to use the style afterwards.
-	void CreateStyle(Color Foreground, Color Background, std::string Name);
+	void CreateStyle(Color Foreground, Color Background, std::string Name, std::initializer_list<Attribute> attrs = std::initializer_list<Attribute>());
 
 	// It sets an already created style to the console.
 	void SetStyle(std::string Name);
@@ -143,6 +144,13 @@ public:
 	void Beep();
 	// The lines written in the console will invert their foreground and background colors for an instant
 	void Flash();
+
+	// It returns the content of the clipboard
+	std::string GetClipboard();
+	// It sets the contents of the clipboard
+	void SetClipboard(std::string str);
+	// It clears the clipboard
+	void ClearClipboard();
 
 
 private:

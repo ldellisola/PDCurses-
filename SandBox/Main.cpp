@@ -1,18 +1,17 @@
 #include <Console.h>
-
+#include<Attributes.h>
 
 
 int main(void) {
 	Console console(true);
-	console.CreateStyle(Color::White, Color::Black, "basic");
-	console.CreateStyle(Color::Green, Color::Black, "hacker");
-	console.CreateStyle(Color::Black, Color::White, "inverted");
+	console.CreateStyle(Color::White, Color::Black, "basic", { Attribute::AlteranteCharSet });
+
 
 	console.SetStyle("basic");
 	
-	console.Beep();
+	console.WriteLine("TEst");
 
-	console.WriteLine("sep");
 
+	console.ReadChar();
 
 }

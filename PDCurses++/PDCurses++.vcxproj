@@ -195,6 +195,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="PDCurses++\Headers\Attributes.h" />
     <ClInclude Include="PDCurses++\Headers\Colors.h" />
     <ClInclude Include="PDCurses++\Headers\Console.h" />
     <ClInclude Include="PDCurses++\Headers\ConsoleStyle.h" />

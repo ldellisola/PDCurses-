@@ -168,14 +168,19 @@ std::string Console::KeyName(int key)
 	return std::string(keyname(key));
 }
 
-void Console::CreateStyle(Color Foreground, Color Background, std::string Name)
+void Console::CreateStyle(Color Foreground, Color Background, std::string Name, std::initializer_list<Attribute> attrs)
 {
-	this->styles[Name] = ConsoleStyle(Name, StyleCount++, Foreground, Background);
+	this->styles[Name] = ConsoleStyle(Name, StyleCount++, Foreground, Background,attrs);
 }
 
 void Console::SetStyle(std::string Name)
 {
-	THROWIF(wcolor_set((WINDOW*)this->window, this->styles.at(Name).GetID(), nullptr) != OK)
+	THROWIF(wcolor_set((WINDOW*)this->window, this->styles.at(Name).GetID(), nullptr) != OK);
+	attr_t prevAttr;
+	short temp;
+	wattr_get((WINDOW*)this->window, &prevAttr, &temp, nullptr);
+	wattr_off((WINDOW*)this->window, prevAttr, nullptr);
+	wattr_on((WINDOW*)this->window, this->styles.at(Name).GetAttributes(), nullptr);
 }
 
 void Console::Clear()
@@ -234,6 +239,27 @@ void Console::Beep()
 void Console::Flash()
 {
 	flash();
+}
+
+std::string Console::GetClipboard()
+{
+	char* temp = nullptr;
+	long size;
+	PDC_getclipboard(&temp, &size);
+
+	std::string retValue = std::string((const char*)temp);
+	PDC_freeclipboard(temp);
+	return retValue;
+}
+
+void Console::SetClipboard(std::string str)
+{
+	PDC_setclipboard(str.c_str(), str.length());
+}
+
+void Console::ClearClipboard()
+{
+	PDC_clearclipboard();
 }
 
 
