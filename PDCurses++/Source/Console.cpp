@@ -5,22 +5,20 @@
 #include "ConsoleStyle.h"
 #include <curses.h>
 
-Console::Console(bool useColor)
+Console::Console()
 {
 	window = initscr();
 	configuration = new Configuration(this->window);
 	this->clipboard = new Clipboard();
 
 	THROWIF(window == nullptr)
-
-	if(useColor)
-		THROWIF(start_color() != OK)
 }
 
 
 Console::~Console()
 {
 	delete configuration;
+	delete clipboard;
 	endwin();
 }
 
@@ -40,7 +38,12 @@ std::string Console::ReadLine(int bufferSize)
 
 char Console::ReadChar()
 {
-	return (char)wgetch(this->window);
+	 return wgetch(this->window);
+}
+
+KeyCode Console::ReadKeyCode()
+{
+	return (KeyCode)wgetch(this->window);
 }
 
 std::string Console::ReadFromScreen(int bufferSize)

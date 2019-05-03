@@ -50,3 +50,8 @@ void Configuration::SetScroll(bool value)
 {
 	scrollok(this->window, value);
 }
+
+void Configuration::StartColor()
+{
+	start_color();
+}

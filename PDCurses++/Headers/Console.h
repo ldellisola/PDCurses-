@@ -6,20 +6,21 @@
 
 #include "Attributes.h"
 #include "Colors.h"
+#include "KeyCodes.h"
 #include "Exceptions.h"
+#include "Configuration.h"
+#include "Clipboard.h"
 
 
 
 // Foward Delaration
-class Configuration;
-class Clipboard;
 typedef struct _win WINDOW;
 class ConsoleStyle;
 
 class Console
 {
 public:
-	Console(bool useColor = true);
+	Console();
 	~Console();
 
 
@@ -32,6 +33,8 @@ public:
 	std::string ReadLine(int bufferSize = 500);
 	// It reads a single character from the console
 	char ReadChar();
+	// It reads a single Keycode from the console
+	KeyCode ReadKeyCode();
 	// It reads the caracters from the current position of the cursor, not the input of the user
 	std::string ReadFromScreen(int bufferSize = 500);
 	// It reads the characters from a given position without changing the cursor position.

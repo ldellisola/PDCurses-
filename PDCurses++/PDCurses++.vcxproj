@@ -117,6 +117,7 @@
     <ClInclude Include="Headers\Console.h" />
     <ClInclude Include="Headers\ConsoleStyle.h" />
     <ClInclude Include="Headers\Exceptions.h" />
+    <ClInclude Include="Headers\KeyCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Clipboard.cpp" />
