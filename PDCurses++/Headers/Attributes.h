@@ -1,8 +1,6 @@
 #pragma once
 
-#include <cstdint>
-
-enum class Attribute : int32_t
+enum class Attribute : unsigned long
 {
 	AlteranteCharSet = 0x0001000,
 	Blink = 0x00400000,

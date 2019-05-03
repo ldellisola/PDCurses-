@@ -46,14 +46,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\Dev\C++\PDCurses++\PDCurses++\Vendor\PDCurses\Headers;$(IncludePath)</IncludePath>
-    <OutDir>$(ProjectDir)$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(ProjectDir)Intermediate\$(Configuration)\$(Platform)</IntDir>
+    <OutDir>$(ProjectDir)$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)Intermediate\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\Dev\C++\PDCurses++\PDCurses++\Vendor\PDCurses\Headers;$(IncludePath)</IncludePath>
-    <OutDir>$(ProjectDir)$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(ProjectDir)Intermediate\$(Configuration)\$(Platform)</IntDir>
+    <OutDir>$(ProjectDir)$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)Intermediate\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -63,7 +63,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile> </PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Vendor\PDCurses\Headers;$(ProjectDir)Headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile> </PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Vendor\PDCurses\Headers;$(ProjectDir)Headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -111,12 +111,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Attributes.h" />
+    <ClInclude Include="Headers\Clipboard.h" />
     <ClInclude Include="Headers\Colors.h" />
+    <ClInclude Include="Headers\Configuration.h" />
     <ClInclude Include="Headers\Console.h" />
     <ClInclude Include="Headers\ConsoleStyle.h" />
     <ClInclude Include="Headers\Exceptions.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Clipboard.cpp" />
+    <ClCompile Include="Source\Configuration.cpp" />
     <ClCompile Include="Source\Console.cpp" />
     <ClCompile Include="Source\ConsoleStyle.cpp" />
   </ItemGroup>
